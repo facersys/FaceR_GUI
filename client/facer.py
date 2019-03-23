@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
+
+import os
 import random
+import time
+from datetime import datetime
+from openpyxl import Workbook
 
 import cv2
 import face_recognition
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QFileDialog
 from numpy import long
 
+from client.global_var import get_value, set_value
 from client.settings import HAARCASCADES_PATH
 from client.tools.datetime_label import change_datetime
 from client.base import BaseWindow
 from client.tools.face import find_face_owner
+from client.tools.others import get_user_info
 from client.tools.qt_tools import show_dialog
 from client.ui.facer import Ui_FaceR_Client
 
@@ -45,7 +53,6 @@ class FaceRClientWindow(BaseWindow):
 
         self.check_in_flag = False
         self.have_check_in_num = 0
-        self.have_check_sid = []
 
         self.algorithm = 'CASCADE'
         self.face_locations = []
@@ -67,6 +74,8 @@ class FaceRClientWindow(BaseWindow):
         # 关闭相机
         self.ui.close_camera_btn.clicked.connect(self.close_camera)
         self.ui.reset_btn.clicked.connect(self.reset)
+
+        self.ui.export_check_in_data_btn.clicked.connect(self.export_result)
 
     def show_datetime(self):
         """实时显示时间和日期"""
@@ -173,9 +182,10 @@ class FaceRClientWindow(BaseWindow):
                             if result.get('code') == 0:
                                 # 只有数据库的学生才可以签到
                                 current_user = result.get('data')
-                                if current_user.get('sid') not in self.have_check_sid:
-                                    print('签到成功...', current_user)
-                                    self.have_check_sid.append(current_user.get('sid'))
+                                if current_user.get('sid') not in [item.get('sid') for item in
+                                                                   get_value('checked_students')]:
+                                    get_value('checked_students').append(
+                                        {'sid': current_user.get('sid'), 't': datetime.now()})
                                     self.have_check_in_num += 1
                 except Exception as e:
                     print(e)
@@ -196,8 +206,8 @@ class FaceRClientWindow(BaseWindow):
         if not self.check_in_flag:
             show_dialog('Warn', 'Please start check in first.')
         else:
-            if connect not in self.have_check_sid:
-                self.have_check_sid.append(connect)
+            if connect not in [item.get('sid') for item in get_value('checked_students')]:
+                get_value('checked_students').append({'sid': connect, 't': datetime.now()})
                 self.have_check_in_num += 1
                 show_dialog('Success', 'Student %s check in by manual success.' % connect)
             else:
@@ -208,11 +218,34 @@ class FaceRClientWindow(BaseWindow):
         self.check_in_flag = False
         self.face_rectangle_flag = False
 
-        self.have_check_sid = []
-        self.face_locations = []
+        set_value('checked_students', [])
+        self.have_check_in_num = 0
         self.ui.check_in_num.display(0)
         self.algorithm = 'Cascade'
 
         self.close_camera()
 
         show_dialog('Success', 'Reset Success')
+
+    def export_result(self):
+        try:
+            filepath = QFileDialog.getSaveFileName(self, "Save File", os.path.join(
+                os.path.expanduser("~"),
+                'Desktop/%s.xlsx' % str(int(time.time()))
+            ), "All files (*.*);;")[0]
+
+            workbook = Workbook()
+            booksheet = workbook.active
+
+            for row_index, student in enumerate(get_value('checked_students')):
+                value = get_user_info(student)
+
+                for col_index, item in enumerate(value):
+                    booksheet.cell(row_index + 1, col_index + 1).value = item
+
+            workbook.save(filepath)
+            show_dialog('Success', 'Export data success.')
+
+        except Exception as e:
+            show_dialog('Warn', 'Export fail.')
+            print(e)

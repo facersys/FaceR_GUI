@@ -3,7 +3,9 @@
 import smtplib
 from email.mime.text import MIMEText
 
-from client.security import MAIL_DEFAULT_SENDER, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
+from client.security import MAIL_DEFAULT_SENDER, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, \
+    MONGO_USER_COLLECTION
+from client.tools import mongo
 
 __author__ = "YingJoy"
 
@@ -48,3 +50,21 @@ def send_message_to_email(receiver, email_header, **kwargs):
     except smtplib.SMTPException as e:
         print(e)
         return False
+
+
+def datetime2str(d):
+    """datetime转字符串"""
+    return d.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def gender2str(g):
+    """性别转字符串"""
+    return '男' if g == 1 else '女' if g == 2 else '保密'
+
+
+def get_user_info(student):
+    """获取用户信息，可保存到excel中的格式"""
+    sinfo = mongo.select_one(MONGO_USER_COLLECTION, {'sid': student.get('sid')})
+    value = [sinfo.get('sid'), datetime2str(student.get('t')), sinfo.get('name'),
+             gender2str(sinfo.get('gender')), sinfo.get('major'), sinfo.get('cname')]
+    return value

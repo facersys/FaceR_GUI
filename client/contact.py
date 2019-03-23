@@ -4,7 +4,7 @@ from PyQt5.QtCore import QDateTime
 from client.base import BaseWindow
 from client.tools.others import send_message_to_email
 from client.tools.qt_tools import show_dialog
-from client.ui.contact import Ui_ContactAdmin
+from client.ui.contact import Ui_contact_admin
 
 __author__ = "YingJoy"
 
@@ -14,7 +14,7 @@ class ContactAdminWindow(BaseWindow):
     def __init__(self):
         super().__init__()
 
-        self.ui = Ui_ContactAdmin()
+        self.ui = Ui_contact_admin()
         self.ui.setupUi(self)
         self.init()
 

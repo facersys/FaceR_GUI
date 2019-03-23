@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>manual_check_in</class>
- <widget class="QDialog" name="manual_check_in">
+ <widget class="QMainWindow" name="manual_check_in">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>297</width>
-    <height>151</height>
+    <width>293</width>
+    <height>122</height>
    </rect>
   </property>
   <property name="font">
@@ -17,39 +17,31 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Manual Check In</string>
+   <string>manual_check_in</string>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>281</width>
-     <height>131</height>
-    </rect>
-   </property>
+  <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="3">
+     <widget class="QLineEdit" name="sid_input"/>
+    </item>
+    <item row="0" column="2">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Student ID:</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="sid_input"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="check_in_btn">
-      <property name="text">
-       <string>Check In</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
+    <item row="1" column="2">
      <widget class="QPushButton" name="calcel_btn">
       <property name="text">
        <string>Calcel</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QPushButton" name="check_in_btn">
+      <property name="text">
+       <string>Check In</string>
       </property>
      </widget>
     </item>
@@ -65,12 +57,12 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>50</x>
-     <y>99</y>
+     <x>45</x>
+     <y>82</y>
     </hint>
     <hint type="destinationlabel">
-     <x>148</x>
-     <y>75</y>
+     <x>146</x>
+     <y>60</y>
     </hint>
    </hints>
   </connection>

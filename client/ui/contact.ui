@@ -1,48 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ContactAdmin</class>
- <widget class="QDialog" name="ContactAdmin">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
+ <class>contact_admin</class>
+ <widget class="QMainWindow" name="contact_admin">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>523</width>
-    <height>479</height>
+    <width>404</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Send Email To Admin</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>461</width>
-     <height>391</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLineEdit" name="admin_email_label">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="font">
-       <font>
-        <family>Bookman Old Style</family>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>yingjoy906@gmail.com</string>
-      </property>
-     </widget>
-    </item>
-    <item>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
      <widget class="QLineEdit" name="email_title_label">
       <property name="enabled">
        <bool>false</bool>
@@ -58,7 +31,23 @@
       </property>
      </widget>
     </item>
-    <item>
+    <item row="0" column="0">
+     <widget class="QLineEdit" name="admin_email_label">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>Bookman Old Style</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>yingjoy906@gmail.com</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
      <widget class="QPlainTextEdit" name="email_content_label">
       <property name="font">
        <font>
@@ -71,21 +60,8 @@
       </property>
      </widget>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="required_label">
-        <property name="font">
-         <font>
-          <family>Bookman Old Style</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ff0000;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QLabel" name="name_label">
         <property name="font">
@@ -96,6 +72,19 @@
         </property>
         <property name="text">
          <string>Your name:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="required_label">
+        <property name="font">
+         <font>
+          <family>Bookman Old Style</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ff0000;&quot;&gt;*&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -123,18 +112,30 @@
       </item>
      </layout>
     </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item row="4" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QLabel" name="date_label">
+       <widget class="QLabel" name="date_label_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="font">
          <font>
           <family>Bookman Old Style</family>
           <pointsize>12</pointsize>
          </font>
         </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
         <property name="text">
-         <string>            Date:</string>
+         <string>Date:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -159,51 +160,43 @@
       </item>
      </layout>
     </item>
+    <item row="5" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cancel_btn">
+        <property name="font">
+         <font>
+          <family>Bookman Old Style</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Calcel</string>
+        </property>
+        <property name="shortcut">
+         <string>Esc</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="submit_btn">
+        <property name="font">
+         <font>
+          <family>Bookman Old Style</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Submit</string>
+        </property>
+        <property name="shortcut">
+         <string>Return</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
-  </widget>
-  <widget class="QPushButton" name="submit_btn">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>430</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Bookman Old Style</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Submit</string>
-   </property>
-   <property name="shortcut">
-    <string>Return</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cancel_btn">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>430</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Bookman Old Style</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Calcel</string>
-   </property>
-   <property name="shortcut">
-    <string>Esc</string>
-   </property>
   </widget>
  </widget>
  <resources/>
@@ -211,15 +204,15 @@
   <connection>
    <sender>cancel_btn</sender>
    <signal>clicked()</signal>
-   <receiver>ContactAdmin</receiver>
+   <receiver>contact_admin</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>360</x>
-     <y>445</y>
+     <x>103</x>
+     <y>462</y>
     </hint>
     <hint type="destinationlabel">
-     <x>261</x>
+     <x>201</x>
      <y>239</y>
     </hint>
    </hints>
