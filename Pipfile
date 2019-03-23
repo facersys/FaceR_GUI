@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+pyqt5 = {index = "https://pypi.douban.com/simple",version = "*"}
+cv2 = {path = "../wheelhouse/opencv_python-4.0.1-cp36-cp36m-win_amd64.whl"}
+numpy = {index = "https://pypi.douban.com/simple",version = "*"}
+pyqt5tools = "*"
+face-recognition = "*"
+
+[requires]
+python_version = "3.6"
