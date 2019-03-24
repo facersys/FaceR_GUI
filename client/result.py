@@ -63,6 +63,7 @@ class ResultWindow(BaseWindow):
             workbook.save(filepath)
             show_dialog('Success', 'Export data success.')
 
+
         except Exception as e:
             show_dialog('Warn', 'Export fail.')
             print(e)

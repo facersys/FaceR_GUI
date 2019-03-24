@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import smtplib
+import time
 from email.mime.text import MIMEText
 
 from client.security import MAIL_DEFAULT_SENDER, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, \
@@ -55,6 +56,11 @@ def send_message_to_email(receiver, email_header, **kwargs):
 def datetime2str(d):
     """datetime转字符串"""
     return d.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def get_current_time(f='%H:%M:%S'):
+    """获取当前时间字符串"""
+    return time.strftime(f, time.localtime(time.time()))
 
 
 def gender2str(g):

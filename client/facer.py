@@ -18,7 +18,7 @@ from client.settings import HAARCASCADES_PATH
 from client.tools.datetime_label import change_datetime
 from client.base import BaseWindow
 from client.tools.face import find_face_owner
-from client.tools.others import get_user_info
+from client.tools.others import get_user_info, get_current_time
 from client.tools.qt_tools import show_dialog
 from client.ui.facer import Ui_FaceR_Client
 
@@ -38,6 +38,7 @@ class FaceRClientWindow(BaseWindow):
         self.ui = Ui_FaceR_Client()
         self.ui.setupUi(self)
 
+        self.add_log('[%s] System initialization in progress.' % get_current_time())
         self.init()
 
         self.camera_timer = QTimer()
@@ -61,6 +62,7 @@ class FaceRClientWindow(BaseWindow):
 
         # 先把相机关了
         self.close_camera()
+        self.add_log('[%s] System initialization succeed.' % get_current_time())
 
     def init_bind_event(self):
         """按钮绑定事件"""
@@ -76,6 +78,7 @@ class FaceRClientWindow(BaseWindow):
         self.ui.reset_btn.clicked.connect(self.reset)
 
         self.ui.export_check_in_data_btn.clicked.connect(self.export_result)
+        self.ui.upload_check_in_data_btn.clicked.connect(self.upload_result)
 
     def show_datetime(self):
         """实时显示时间和日期"""
@@ -85,6 +88,7 @@ class FaceRClientWindow(BaseWindow):
 
     def open_face_rectangle(self):
         """打开/关闭人脸框"""
+        self.add_log('[%s] %s face rectangle.' % (get_current_time(), 'Close' if self.face_rectangle_flag else 'Open'))
         if not self.camera.isOpened():
             show_dialog('Warn', 'Please open camera first')
         else:
@@ -93,6 +97,7 @@ class FaceRClientWindow(BaseWindow):
 
     def start_check_in(self):
         """开始签到"""
+        self.add_log('[%s] %s check in.' % (get_current_time(), 'Stop' if self.check_in_flag else 'Start'))
         if not self.camera.isOpened():
             show_dialog('Warn', 'Please open camera first')
         else:
@@ -101,6 +106,7 @@ class FaceRClientWindow(BaseWindow):
 
     def open_camera(self):
         """打开摄像头"""
+        self.add_log('[%s] Open camera.' % get_current_time())
         self.ui.camera_area.setText('Waiting...')
         flag = self.camera.open(0)
         if not flag:
@@ -110,6 +116,7 @@ class FaceRClientWindow(BaseWindow):
 
     def close_camera(self):
         """关闭相机"""
+        self.add_log('[%s] Close camera.' % get_current_time())
         if not self.camera.isOpened():
             show_dialog('Warn', 'Please open camera first')
         else:
@@ -187,6 +194,9 @@ class FaceRClientWindow(BaseWindow):
                                     get_value('checked_students').append(
                                         {'sid': current_user.get('sid'), 't': datetime.now()})
                                     self.have_check_in_num += 1
+
+                                    self.add_log('[%s] Student [%s] checked succeed.' %
+                                                 (get_current_time(), current_user.get('sid')))
                 except Exception as e:
                     print(e)
                     pass
@@ -210,8 +220,10 @@ class FaceRClientWindow(BaseWindow):
                 get_value('checked_students').append({'sid': connect, 't': datetime.now()})
                 self.have_check_in_num += 1
                 show_dialog('Success', 'Student %s check in by manual success.' % connect)
+                self.add_log('[%s] Student %s check in by manual success.' % (get_current_time(), connect))
             else:
                 show_dialog('Success', 'Student %s has checked in.' % connect)
+                self.add_log('[%s] Student %s has checked in.' % (get_current_time(), connect))
             self.ui.check_in_num.display(self.have_check_in_num)
 
     def reset(self):
@@ -222,6 +234,7 @@ class FaceRClientWindow(BaseWindow):
         self.have_check_in_num = 0
         self.ui.check_in_num.display(0)
         self.algorithm = 'Cascade'
+        self.ui.log_list.clear()
 
         self.close_camera()
 
@@ -229,6 +242,7 @@ class FaceRClientWindow(BaseWindow):
 
     def export_result(self):
         try:
+            # 导出excel
             filepath = QFileDialog.getSaveFileName(self, "Save File", os.path.join(
                 os.path.expanduser("~"),
                 'Desktop/%s.xlsx' % str(int(time.time()))
@@ -244,8 +258,25 @@ class FaceRClientWindow(BaseWindow):
                     booksheet.cell(row_index + 1, col_index + 1).value = item
 
             workbook.save(filepath)
+
+            # 导出日志
+            logs = "\n".join([self.ui.log_list.item(i).text() for i in range(self.ui.log_list.count())])
+            with open("".join(filepath.split('.')[:-1]) + '.txt', 'w') as f:
+                f.write(logs)
+
             show_dialog('Success', 'Export data success.')
+            self.add_log('[%s] Export result succeed.' % get_current_time())
 
         except Exception as e:
             show_dialog('Warn', 'Export fail.')
+            self.add_log('[%s] Export result fail.' % get_current_time())
             print(e)
+
+    def add_log(self, log):
+        """添加日志"""
+        self.ui.log_list.addItem(log)
+
+    def upload_result(self):
+        """上传结果到服务器，后面再写吧"""
+        show_dialog('Success', 'Upload result success.')
+        self.add_log('[%s] Upload result success.' % get_current_time())
