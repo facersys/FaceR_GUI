@@ -13,9 +13,11 @@ from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtWidgets import QFileDialog
 from numpy import long
 
+from Tool import xtredis
 from Tool.face import find_face_owner
-from Tool.others import get_user_info, get_current_time
+from Tool.others import get_user_info, get_current_time, datetime2str
 from Tool.feedback import show_dialog
+from Tool.check import check
 
 from Window.global_var import get_value, set_value
 from Window.base import BaseWindow
@@ -67,6 +69,11 @@ class FaceRClientWindow(BaseWindow):
         self.close_camera()
         self.add_log('[%s] System initialization succeed.' % get_current_time())
 
+        # 初始化人脸检测模块
+        self.fd_timer = QTimer(self)
+        self.fd_timer.timeout.connect(self.face_detection)
+        self.fd_timer.start(1000)
+
     def init_bind_event(self):
         """按钮绑定事件"""
         self.ui.face_rect_btn.clicked.connect(self.open_face_rectangle)
@@ -84,6 +91,9 @@ class FaceRClientWindow(BaseWindow):
         self.ui.upload_check_in_data_btn.clicked.connect(self.upload_result)
 
     def change_datetime(self, client):
+        """
+        当前时间标签
+        """
         dt = QDateTime.currentDateTime()
         current_date = dt.toString('dddd, M/d/yyyy')
         current_time = dt.toString('hh:mm:ss')
@@ -164,20 +174,9 @@ class FaceRClientWindow(BaseWindow):
         # 正常显示的人脸
         show = image
         show = cv2.cvtColor(show, cv2.COLOR_BGR2RGB)
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-        # 人脸检测
-        if self.algorithm == 'Cascade':
-            cascade_face_locations = self.face_cascade.detectMultiScale(gray, 1.3, 4,
-                                                                        flags=cv2.CASCADE_SCALE_IMAGE,
-                                                                        minSize=(30, 30))
-            self.face_locations = [(long(y), long(x + w), long(y + h), long(x)) for (x, y, h, w) in
-                                   cascade_face_locations]
-
-        elif self.algorithm == 'MTCNN':
-            self.face_locations = face_recognition.face_locations(gray, 2)
-        else:
-            self.face_locations = face_recognition.face_locations(gray)
+        """人脸检测块"""
+        # self.fd_timer.start(10)
 
         if self.face_rectangle_flag:
             # 画框框
@@ -196,18 +195,16 @@ class FaceRClientWindow(BaseWindow):
                     # 这里允许多人脸同时签到
                     if face_codes:
                         for face_code in face_codes:
-                            result = find_face_owner(face_code)
-                            if result.get('code') == 0:
-                                # 只有数据库的学生才可以签到
-                                current_user = result.get('data')
-                                if current_user.get('sid') not in [item.get('sid') for item in
-                                                                   get_value('checked_students')]:
-                                    get_value('checked_students').append(
-                                        {'sid': current_user.get('sid'), 't': datetime.now()})
-                                    self.have_check_in_num += 1
+                            uid = find_face_owner(face_code)
+                            if uid and (uid not in xtredis.lrange('checked_uid', 0, -1)):
+                                print(xtredis.lrange('checked_uid', 0, -1))
+                                # 用户是否已经签到，签到了，则不签
+                                # 如果用户存在，将uid写入redis，只有数据库的学生才可以签到
+                                check(uid=uid, time=datetime2str(datetime.now()))
 
-                                    self.add_log('[%s] Student [%s] checked succeed.' %
-                                                 (get_current_time(), current_user.get('sid')))
+                                self.have_check_in_num += 1
+                                self.add_log('[%s] Student [%s] checked succeed.' %
+                                             (get_current_time(), uid))
                 except Exception as e:
                     print(e)
                     pass
@@ -221,6 +218,31 @@ class FaceRClientWindow(BaseWindow):
 
         # 签到人数绑定
         self.ui.check_in_num.display(self.have_check_in_num)
+
+    def face_detection(self):
+        """人脸检测"""
+        if self.camera.isOpened() and self.face_rectangle_flag:
+            flag, image = self.camera.read()
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            if self.algorithm == 'Cascade':
+                """CASCADE"""
+                cascade_face_locations = self.face_cascade.detectMultiScale(
+                    gray, 1.3, 4,
+                    flags=cv2.CASCADE_SCALE_IMAGE,
+                    minSize=(30, 30)
+                )
+                self.face_locations = [
+                    (long(y), long(x + w), long(y + h), long(x))
+                    for (x, y, h, w) in cascade_face_locations
+                ]
+
+            elif self.algorithm == 'MTCNN':
+                """MTCNN"""
+                self.face_locations = face_recognition.face_locations(gray, 2)
+
+            else:
+                """MTCNN-PLUS"""
+                self.face_locations = face_recognition.face_locations(gray)
 
     def manual_check_in(self, connect):
         """手动签到"""

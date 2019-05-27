@@ -9,7 +9,8 @@ mongo = MongoTools(getConfig('mongodb', 'db'))
 xtredis = Redis(
     getConfig('redis', 'server'),
     port=getConfig('redis', 'port'),
-    password=getConfig('redis', 'password')
+    password=getConfig('redis', 'password'),
+    decode_responses=True
 )
 db = pymysql.connect(
     host=getConfig('mysql', 'host'),
