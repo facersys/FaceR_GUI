@@ -3,10 +3,8 @@
 import smtplib
 import time
 from email.mime.text import MIMEText
-
-from client.security import MAIL_DEFAULT_SENDER, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, \
-    MONGO_USER_COLLECTION
-from client.tools import mongo
+from Config import getConfig
+from Tool import mongo, db
 
 __author__ = "YingJoy"
 
@@ -38,15 +36,15 @@ def send_message_to_email(receiver, email_header, **kwargs):
         current_date=kwargs.get('current_date')
     )
     message = MIMEText(email_content, 'html', 'utf-8')
-    message['From'] = MAIL_DEFAULT_SENDER
+    message['From'] = getConfig('qmail', 'default_sender')
     message['To'] = receiver
     message['Subject'] = subject
 
     try:
-        smtpObj = smtplib.SMTP(MAIL_SERVER, MAIL_PORT)
+        smtpObj = smtplib.SMTP(getConfig('qmail', 'server'), getConfig('qmail', 'port'))
         smtpObj.starttls()
-        smtpObj.login(MAIL_USERNAME, MAIL_PASSWORD)
-        smtpObj.sendmail(MAIL_DEFAULT_SENDER, receiver, message.as_string())
+        smtpObj.login(getConfig('qmail', 'username'), getConfig('qmail', 'password'))
+        smtpObj.sendmail(getConfig('qmail', 'default_sender'), receiver, message.as_string())
         return True
     except smtplib.SMTPException as e:
         print(e)
@@ -68,9 +66,15 @@ def gender2str(g):
     return '男' if g == 1 else '女' if g == 2 else '保密'
 
 
-def get_user_info(student):
-    """获取用户信息，可保存到excel中的格式"""
-    sinfo = mongo.select_one(MONGO_USER_COLLECTION, {'sid': student.get('sid')})
-    value = [sinfo.get('sid'), datetime2str(student.get('t')), sinfo.get('name'),
-             gender2str(sinfo.get('gender')), sinfo.get('major'), sinfo.get('cname')]
-    return value
+def get_user_info(uid):
+    """通过用户id获取用户信息，可保存到excel中的格式"""
+    with db.cursor() as cursor:
+        sql = f"""SELECT * FROM user WHERE id='{uid}'"""
+        print(sql)
+        cursor.execute(sql)
+        result = cursor.fetchone()
+    return result
+
+
+if __name__ == '__main__':
+    get_user_info('T3WD9LdZ2xMiRmu7Kdhp')

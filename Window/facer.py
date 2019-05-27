@@ -9,18 +9,18 @@ from openpyxl import Workbook
 import cv2
 import face_recognition
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, QDateTime
 from PyQt5.QtWidgets import QFileDialog
 from numpy import long
 
-from client.global_var import get_value, set_value
-from client.settings import HAARCASCADES_PATH
-from client.tools.datetime_label import change_datetime
-from client.base import BaseWindow
-from client.tools.face import find_face_owner
-from client.tools.others import get_user_info, get_current_time
-from client.tools.qt_tools import show_dialog
-from client.ui.facer import Ui_FaceR_Client
+from Tool.face import find_face_owner
+from Tool.others import get_user_info, get_current_time
+from Tool.feedback import show_dialog
+
+from Window.global_var import get_value, set_value
+from Window.base import BaseWindow
+
+from UI.facer import Ui_FaceR_Client
 
 __author__ = "YingJoy"
 
@@ -49,7 +49,10 @@ class FaceRClientWindow(BaseWindow):
         self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1366)
         self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 768)
 
-        self.face_cascade = cv2.CascadeClassifier(HAARCASCADES_PATH)
+        self.face_cascade = cv2.CascadeClassifier(
+            os.path.split(
+                os.path.split(os.path.realpath(__file__))[0])[0] + '/static/xml/haarcascade_frontalface_default.xml'
+        )
         self.face_rectangle_flag = False
 
         self.check_in_flag = False
@@ -80,10 +83,18 @@ class FaceRClientWindow(BaseWindow):
         self.ui.export_check_in_data_btn.clicked.connect(self.export_result)
         self.ui.upload_check_in_data_btn.clicked.connect(self.upload_result)
 
+    def change_datetime(self, client):
+        dt = QDateTime.currentDateTime()
+        current_date = dt.toString('dddd, M/d/yyyy')
+        current_time = dt.toString('hh:mm:ss')
+
+        client.date_label.setText("%s" % current_date)
+        client.time_label.setText("Current Time: %s" % current_time)
+
     def show_datetime(self):
         """实时显示时间和日期"""
         timer = QTimer(self)
-        timer.timeout.connect(lambda: change_datetime(self.ui))
+        timer.timeout.connect(lambda: self.change_datetime(self.ui))
         timer.start()
 
     def open_face_rectangle(self):

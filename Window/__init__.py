@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from client.contact import ContactAdminWindow
-from client.manual import ManualWindow
-from client.facer import FaceRClientWindow
-from client.result import ResultWindow
+from Window.facer import FaceRClientWindow
+from Window.contact import ContactAdminWindow
+from Window.manual import ManualWindow
+from Window.result import ResultWindow
 
 __author__ = "YingJoy"
 

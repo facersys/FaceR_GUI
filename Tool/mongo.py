@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pymongo
-from client.security import MONGO_URI
+from Config import getConfig
 
 __author__ = "YingJoy"
 
@@ -12,7 +12,7 @@ class MongoTools:
         """
         初始化
         """
-        self.mongo_client = pymongo.MongoClient(MONGO_URI)
+        self.mongo_client = pymongo.MongoClient(getConfig('mongodb', 'uri'))
         self.db = self.mongo_client[db]
 
     def insert(self, collection, document, indexs=None):

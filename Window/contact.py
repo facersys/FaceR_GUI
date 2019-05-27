@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtCore import QDateTime
-from client.base import BaseWindow
-from client.tools.others import send_message_to_email
-from client.tools.qt_tools import show_dialog
-from client.ui.contact import Ui_contact_admin
+from Window.base import BaseWindow
+from Tool.others import send_message_to_email
+from Tool.feedback import show_dialog
+from UI.contact import Ui_contact_admin
 
 __author__ = "YingJoy"
 

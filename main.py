@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from client import create_window
+from Window import create_window
 from PyQt5.QtWidgets import QApplication
 
 __author__ = "YingJoy"

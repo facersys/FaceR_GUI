@@ -4,11 +4,11 @@ import time
 
 from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
 
-from client.base import BaseWindow
-from client.global_var import get_value
-from client.tools.others import get_user_info
-from client.tools.qt_tools import show_dialog
-from client.ui.result import Ui_checked_result
+from Window.base import BaseWindow
+from Window.global_var import get_value
+from Tool.others import get_user_info
+from Tool.feedback import show_dialog
+from UI.result import Ui_checked_result
 
 import os
 from openpyxl import Workbook
