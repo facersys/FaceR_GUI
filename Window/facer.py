@@ -9,17 +9,16 @@ from openpyxl import Workbook
 import cv2
 import face_recognition
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import QTimer, QDateTime
+from PyQt5.QtCore import QTimer, QDateTime, QThread, pyqtSignal
 from PyQt5.QtWidgets import QFileDialog
 from numpy import long
 
 from Tool import xtredis
 from Tool.face import find_face_owner
-from Tool.others import get_user_info, get_current_time, datetime2str
+from Tool.others import get_user_info, get_current_time, datetime2str, gender2str
 from Tool.feedback import show_dialog
-from Tool.check import check
-
-from Window.global_var import get_value, set_value
+from Tool.check import check, get_student_info, clear_redis, checkWithSid
+from Tool.voice import checked_voice
 from Window.base import BaseWindow
 
 from UI.facer import Ui_FaceR_Client
@@ -60,7 +59,7 @@ class FaceRClientWindow(BaseWindow):
         self.check_in_flag = False
         self.have_check_in_num = 0
 
-        self.algorithm = 'CASCADE'
+        self.algorithm = 'MTCNN-Plus'
         self.face_locations = []
 
         self.init_bind_event()
@@ -68,11 +67,6 @@ class FaceRClientWindow(BaseWindow):
         # 先把相机关了
         self.close_camera()
         self.add_log('[%s] System initialization succeed.' % get_current_time())
-
-        # 初始化人脸检测模块
-        self.fd_timer = QTimer(self)
-        self.fd_timer.timeout.connect(self.face_detection)
-        self.fd_timer.start(1000)
 
     def init_bind_event(self):
         """按钮绑定事件"""
@@ -174,9 +168,28 @@ class FaceRClientWindow(BaseWindow):
         # 正常显示的人脸
         show = image
         show = cv2.cvtColor(show, cv2.COLOR_BGR2RGB)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-        """人脸检测块"""
-        # self.fd_timer.start(10)
+        # 人脸检测
+        if self.face_rectangle_flag:
+            if self.algorithm == 'MTCNN-Plus':
+                """CASCADE"""
+                cascade_face_locations = self.face_cascade.detectMultiScale(
+                    gray, 1.3, 4,
+                    flags=cv2.CASCADE_SCALE_IMAGE,
+                    minSize=(30, 30)
+                )
+
+                self.face_locations = [
+                    (long(y), long(x + w), long(y + h), long(x))
+                    for (x, y, h, w) in cascade_face_locations
+                ]
+            elif self.algorithm == 'MTCNN':
+                """MTCNN"""
+                self.face_locations = face_recognition.face_locations(gray, 2)
+            else:
+                """Cascade"""
+                self.face_locations = face_recognition.face_locations(gray, 1)
 
         if self.face_rectangle_flag:
             # 画框框
@@ -190,24 +203,28 @@ class FaceRClientWindow(BaseWindow):
 
             if self.face_locations:
                 # 检测到了人脸，需要进行数据库匹配
-                try:
-                    face_codes = face_recognition.face_encodings(show, self.face_locations)
-                    # 这里允许多人脸同时签到
-                    if face_codes:
-                        for face_code in face_codes:
-                            uid = find_face_owner(face_code)
-                            if uid and (uid not in xtredis.lrange('checked_uid', 0, -1)):
-                                print(xtredis.lrange('checked_uid', 0, -1))
-                                # 用户是否已经签到，签到了，则不签
-                                # 如果用户存在，将uid写入redis，只有数据库的学生才可以签到
-                                check(uid=uid, time=datetime2str(datetime.now()))
+                face_codes = face_recognition.face_encodings(show, self.face_locations)
+                # 这里允许多人脸同时签到
+                if face_codes:
+                    for face_code in face_codes:
+                        uid = find_face_owner(face_code)
+                        if uid and (uid not in xtredis.lrange('checked_uid', 0, -1)):
+                            # 用户是否已经签到，签到了，则不签
+                            # 如果用户存在，将uid写入redis，只有数据库的学生才可以签到
+                            student_info = get_student_info(uid)
+                            check(uid=uid, time=datetime2str(datetime.now()))
 
-                                self.have_check_in_num += 1
-                                self.add_log('[%s] Student [%s] checked succeed.' %
-                                             (get_current_time(), uid))
-                except Exception as e:
-                    print(e)
-                    pass
+                            self.have_check_in_num += 1
+
+                            # 这里拿到学生姓名吧
+                            # 语音播报
+                            self.checkedvVoiceThread = CheckedVoiceThread(student_info.get('name', uid))
+                            self.checkedvVoiceThread.finishSignal.connect(self.t)
+                            self.checkedvVoiceThread.start()
+                            self.checkedvVoiceThread.quit()
+
+                            self.add_log('[%s] Student [%s] checked succeed.' %
+                                         (get_current_time(), student_info.get('name', uid)))
 
         # 加上FPS
         show = cv2.putText(show, 'FPS: %s' % self.get_fps(), (10, 50),
@@ -219,57 +236,30 @@ class FaceRClientWindow(BaseWindow):
         # 签到人数绑定
         self.ui.check_in_num.display(self.have_check_in_num)
 
-    def face_detection(self):
-        """人脸检测"""
-        if self.camera.isOpened() and self.face_rectangle_flag:
-            flag, image = self.camera.read()
-            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            if self.algorithm == 'Cascade':
-                """CASCADE"""
-                cascade_face_locations = self.face_cascade.detectMultiScale(
-                    gray, 1.3, 4,
-                    flags=cv2.CASCADE_SCALE_IMAGE,
-                    minSize=(30, 30)
-                )
-                self.face_locations = [
-                    (long(y), long(x + w), long(y + h), long(x))
-                    for (x, y, h, w) in cascade_face_locations
-                ]
-
-            elif self.algorithm == 'MTCNN':
-                """MTCNN"""
-                self.face_locations = face_recognition.face_locations(gray, 2)
-
-            else:
-                """MTCNN-PLUS"""
-                self.face_locations = face_recognition.face_locations(gray)
-
     def manual_check_in(self, connect):
-        """手动签到"""
+        """手动签到，为那些没有录入数据的用户保留"""
         if not self.check_in_flag:
             show_dialog('Warn', 'Please start check in first.')
         else:
-            if connect not in [item.get('sid') for item in get_value('checked_students')]:
-                get_value('checked_students').append({'sid': connect, 't': datetime.now()})
-                self.have_check_in_num += 1
-                show_dialog('Success', 'Student %s check in by manual success.' % connect)
-                self.add_log('[%s] Student %s check in by manual success.' % (get_current_time(), connect))
-            else:
-                show_dialog('Success', 'Student %s has checked in.' % connect)
-                self.add_log('[%s] Student %s has checked in.' % (get_current_time(), connect))
+            checkWithSid(sid=connect, time=datetime2str(datetime.now()))
+            self.have_check_in_num += 1
+            show_dialog('Success', 'Student %s check in by manual success.' % connect)
+            self.add_log('[%s] Student %s check in by manual success.' % (get_current_time(), connect))
             self.ui.check_in_num.display(self.have_check_in_num)
 
     def reset(self):
         self.check_in_flag = False
         self.face_rectangle_flag = False
 
-        set_value('checked_students', [])
         self.have_check_in_num = 0
         self.ui.check_in_num.display(0)
         self.algorithm = 'Cascade'
         self.ui.log_list.clear()
 
         self.close_camera()
+
+        # 清除redis数据
+        clear_redis()
 
         show_dialog('Success', 'Reset Success')
 
@@ -284,20 +274,24 @@ class FaceRClientWindow(BaseWindow):
             workbook = Workbook()
             booksheet = workbook.active
 
-            for row_index, student in enumerate(get_value('checked_students')):
-                value = get_user_info(student)
+            checked_uids = xtredis.lrange('checked_uid', 0, -1)
+            checked_times = xtredis.lrange('checked_time', 0, -1)
+            for row_index, uid in enumerate(checked_uids):
+                if uid[:3] == 'sid':
+                    for col_index, item in enumerate(
+                            [uid[3:], checked_times[row_index], '', '', '', '']):
+                        booksheet.cell(row_index + 1, col_index + 1).value = item
+                else:
+                    userinfo = get_user_info(uid)
 
-                for col_index, item in enumerate(value):
-                    booksheet.cell(row_index + 1, col_index + 1).value = item
+                    for col_index, item in enumerate(
+                            [userinfo.get('sid'), checked_times[row_index], userinfo.get('name'),
+                             gender2str(userinfo.get('gender')), userinfo.get('class_name'), userinfo.get('major')]):
+                        booksheet.cell(row_index + 1, col_index + 1).value = item
 
             workbook.save(filepath)
-
-            # 导出日志
-            logs = "\n".join([self.ui.log_list.item(i).text() for i in range(self.ui.log_list.count())])
-            with open("".join(filepath.split('.')[:-1]) + '.txt', 'w') as f:
-                f.write(logs)
-
             show_dialog('Success', 'Export data success.')
+
             self.add_log('[%s] Export result succeed.' % get_current_time())
 
         except Exception as e:
@@ -313,3 +307,17 @@ class FaceRClientWindow(BaseWindow):
         """上传结果到服务器，后面再写吧"""
         show_dialog('Success', 'Upload result success.')
         self.add_log('[%s] Upload result success.' % get_current_time())
+
+
+class CheckedVoiceThread(QThread):
+    """语音播报线程"""
+
+    finishSignal = pyqtSignal(list)
+
+    def __init__(self, uid):
+        super().__init__()
+        self.uid = uid
+
+    def run(self):
+        checked_voice(self.uid)
+        self.finishSignal.emit([1, 2, 3])

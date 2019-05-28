@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b72d44e4-c230-4195-b07d-26f7e88e93b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Tool/check.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tool/voice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Ying_Joy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Ying_Joy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tool/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tool/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/setting.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/setting.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tool/check.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tool/check.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tool/others.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tool/others.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/facer.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI/facer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/facer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/UI/facer.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Window/facer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window/facer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Window/manual.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window/manual.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Window/result.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window/result.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,57 +44,12 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Window/facer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-205">
-              <caret line="159" column="46" selection-start-line="159" selection-start-column="46" selection-end-line="159" selection-end-column="46" />
-              <folding>
-                <element signature="e#25#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tool/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-              <folding>
-                <element signature="e#25#58#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tool/others.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
-              <folding>
-                <element signature="e#25#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Tool/check.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/redis_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="46" />
+            <state relative-caret-position="140">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -122,6 +84,14 @@
       <find>contact_admin_window</find>
       <find>haar</find>
       <find>change_datetime</find>
+      <find>FaceR</find>
+      <find>GOOGLE_TTS_URL</find>
+      <find>f</find>
+      <find>track</find>
+      <find>check</find>
+      <find>exists</find>
+      <find>exist_stu</find>
+      <find>set_value</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,11 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/FacerClientWindow.py" />
-        <option value="$PROJECT_DIR$/client/tools/datetime_label.py" />
-        <option value="$PROJECT_DIR$/client/tools/qt_tools.py" />
-        <option value="$PROJECT_DIR$/client/tools/log.py" />
-        <option value="$PROJECT_DIR$/client/FaceRClientWindow.py" />
         <option value="$PROJECT_DIR$/base.py" />
         <option value="$PROJECT_DIR$/client/BaseWindow.py" />
         <option value="$PROJECT_DIR$/client/ui/facer.py" />
@@ -164,22 +129,27 @@
         <option value="$PROJECT_DIR$/client/base.py" />
         <option value="$PROJECT_DIR$/client/__init__.py" />
         <option value="$PROJECT_DIR$/Window/__init__.py" />
-        <option value="$PROJECT_DIR$/Window/result.py" />
         <option value="$PROJECT_DIR$/client/security.py" />
         <option value="$PROJECT_DIR$/client/settings.py" />
         <option value="$PROJECT_DIR$/Tool/mongo.py" />
-        <option value="$PROJECT_DIR$/Window/manual.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Window/base.py" />
         <option value="$PROJECT_DIR$/Tool/yredis.py" />
         <option value="$PROJECT_DIR$/Tool/datetime_label.py" />
         <option value="$PROJECT_DIR$/Tool/feedback.py" />
-        <option value="$PROJECT_DIR$/Config/setting.ini" />
-        <option value="$PROJECT_DIR$/Tool/others.py" />
-        <option value="$PROJECT_DIR$/Tool/check.py" />
         <option value="$PROJECT_DIR$/Tool/face.py" />
         <option value="$PROJECT_DIR$/Test/redis_test.py" />
         <option value="$PROJECT_DIR$/Tool/__init__.py" />
+        <option value="$PROJECT_DIR$/Test/thread_test.py" />
+        <option value="$PROJECT_DIR$/Test/qthread_test.py" />
+        <option value="C:/Software/Python/Python36/Lib/site-packages/gtts/tts.py" />
+        <option value="$PROJECT_DIR$/Config/setting.ini" />
+        <option value="$PROJECT_DIR$/Test/voice_test.py" />
+        <option value="$PROJECT_DIR$/Tool/voice.py" />
+        <option value="$PROJECT_DIR$/Tool/others.py" />
+        <option value="$PROJECT_DIR$/Tool/check.py" />
+        <option value="$PROJECT_DIR$/Window/manual.py" />
+        <option value="$PROJECT_DIR$/Window/result.py" />
         <option value="$PROJECT_DIR$/Window/facer.py" />
       </list>
     </option>
@@ -198,6 +168,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -208,23 +179,12 @@
             <path>
               <item name="FaceR_client" type="b2602c69:ProjectViewProjectNode" />
               <item name="FaceR_client" type="462c0819:PsiDirectoryNode" />
-              <item name="Config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FaceR_client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FaceR_client" type="462c0819:PsiDirectoryNode" />
-              <item name="Tool" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FaceR_client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FaceR_client" type="462c0819:PsiDirectoryNode" />
               <item name="Window" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -236,19 +196,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\Test" />
-      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\Window" />
-      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client" />
-      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\UI" />
-      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\test" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\client\static" />
       <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\client\tools" />
       <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\client\ui" />
       <recent name="E:\Python Workspace\FaceR\FaceR_client\client\static\xml" />
       <recent name="E:\Python Workspace\FaceR\FaceR_client\client\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\Test\thread_test" />
+      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\Test" />
+      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\Window" />
+      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client" />
+      <recent name="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\UI" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -264,7 +224,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration name="face" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="check" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FaceR_client" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -277,7 +237,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tool/face.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tool/check.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -308,7 +268,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="redis_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="qthread_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FaceR_client" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -321,7 +281,51 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/redis_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/qthread_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="thread_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="FaceR_client" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Ying Joy\Documents\Code\PyCharm\FaceR_client\Test\thread_test\ui.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="voice_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="FaceR_client" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Test/voice_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -333,8 +337,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.redis_test" />
-        <item itemvalue="Python.face" />
+        <item itemvalue="Python.voice_test" />
+        <item itemvalue="Python.check" />
+        <item itemvalue="Python.qthread_test" />
+        <item itemvalue="Python.thread_test" />
       </list>
     </recent_temporary>
   </component>
@@ -378,30 +384,31 @@
       <workItem from="1558529909419" duration="703000" />
       <workItem from="1558602039972" duration="321000" />
       <workItem from="1558678975969" duration="21000" />
-      <workItem from="1558928687091" duration="15260000" />
+      <workItem from="1558928687091" duration="19234000" />
+      <workItem from="1559027974306" duration="13336000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80762000" />
+    <option name="totallyTimeSpent" value="98072000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1381" height="885" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19018868" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49911505" visible="true" weight="0.16075471" />
+      <window_info id="Structure" order="1" sideWeight="0.50088495" side_tool="true" weight="0.19320755" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32804233" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49962264" visible="true" weight="0.25661376" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.17592593" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.28968254" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49962264" visible="true" weight="0.22751322" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3121693" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.37169313" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.39814815" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50037736" side_tool="true" weight="0.3121693" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.38359788" />
@@ -419,55 +426,37 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="Pipfile" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://C:/Software/Python/Python36/Lib/site-packages/gtts/tts.py</url>
+          <line>216</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://C:/Software/Python/Python36/Lib/site-packages/gtts/tts.py</url>
+          <line>209</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/FaceR_client$redis_test.coverage" NAME="redis_test Coverage Results" MODIFIED="1558954057607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/FaceR_client$voice_test.coverage" NAME="voice_test Coverage Results" MODIFIED="1559036169725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
     <SUITE FILE_PATH="coverage/FaceR_client$__main__.coverage" NAME="__main__ Coverage Results" MODIFIED="1555592494045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FaceR_client$qthread_test.coverage" NAME="qthread_test Coverage Results" MODIFIED="1559029273174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
     <SUITE FILE_PATH="coverage/FaceR_client$cut_face.coverage" NAME="cut_face Coverage Results" MODIFIED="1558530326335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/FaceR_client$others.coverage" NAME="others Coverage Results" MODIFIED="1558950992914" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tool" />
     <SUITE FILE_PATH="coverage/FaceR_client$face.coverage" NAME="face Coverage Results" MODIFIED="1558953885209" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tool" />
+    <SUITE FILE_PATH="coverage/FaceR_client$thread_test.coverage" NAME="thread_test Coverage Results" MODIFIED="1559028999080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Test" />
+    <SUITE FILE_PATH="coverage/FaceR_client$check.coverage" NAME="check Coverage Results" MODIFIED="1559029970183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Tool" />
     <SUITE FILE_PATH="coverage/FaceR_client$facer.coverage" NAME="facer Coverage Results" MODIFIED="1558951033695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/FaceR_client$main.coverage" NAME="main Coverage Results" MODIFIED="1558955556014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FaceR_client$main.coverage" NAME="main Coverage Results" MODIFIED="1559041290021" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FaceR_client$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1558945478044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Config" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/ui/ContractAdminUI.py" />
-    <entry file="file://$PROJECT_DIR$/UI/facer.ui">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="39" lean-forward="true" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1447493715/cv2/CascadeClassifier.py" />
-    <entry file="file://C:/Software/Python/Python36/Lib/random.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="752" selection-start-line="752" selection-end-line="752" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1447493715/PyQt5/QtCore/pyqtSignal.py" />
-    <entry file="file://$PROJECT_DIR$/UI/manual.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/ui/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/result.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="87" column="56" lean-forward="true" selection-start-line="87" selection-start-column="56" selection-end-line="87" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1447493715/PyQt5/QtWidgets/QMainWindow.py" />
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1447493715/PyQt5/QtWidgets/QFileDialog.py" />
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1447493715/PyQt5/QtWidgets/QListWidget.py" />
     <entry file="file://$PROJECT_DIR$/static/logo.ico">
@@ -534,41 +523,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Window/result.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/security.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/client/security.py" />
+    <entry file="file://$PROJECT_DIR$/client/settings.py" />
+    <entry file="file://$PROJECT_DIR$/client/base.py" />
+    <entry file="file://$PROJECT_DIR$/client/__init__.py" />
     <entry file="file://$PROJECT_DIR$/Test/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -597,13 +555,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tool/yredis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/yredis.py" />
     <entry file="file://$PROJECT_DIR$/Window/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
@@ -634,13 +586,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tool/datetime_label.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/datetime_label.py" />
     <entry file="file://C:/Software/Python/Python36/Lib/site-packages/pymysql/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -652,16 +598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="480" column="27" selection-start-line="480" selection-start-column="21" selection-end-line="480" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tool/feedback.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -685,71 +621,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Window/manual.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-          <folding>
-            <element signature="e#25#60#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Window/global_var.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Config/setting.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tool/face.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-          <folding>
-            <element signature="e#25#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test/redis_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tool/check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tool/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-          <folding>
-            <element signature="e#25#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tool/others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="e#25#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,13 +635,170 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding>
+            <element signature="e#25#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/redis_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/qthread_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+          <folding>
+            <element signature="e#24#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/thread_test/ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/face.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+          <folding>
+            <element signature="e#25#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1447493715/PyQt5/QtCore/QThread.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="134" column="8" selection-start-line="134" selection-start-column="8" selection-end-line="134" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Software/Python/Python36/Lib/site-packages/gtts/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://C:/Software/Python/Python36/Lib/site-packages/gtts/tts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="219" column="7" lean-forward="true" selection-start-line="219" selection-start-column="7" selection-end-line="219" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Software/Python/Python36/Lib/tempfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="523" column="4" selection-start-line="523" selection-start-column="4" selection-end-line="523" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/voice_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Config/setting.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/voice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#25#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1447493715/PyQt5/QtCore/pyqtSignal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/feedback.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/others.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="e#25#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tool/check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Window/manual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+          <folding>
+            <element signature="e#25#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1447493715/PyQt5/QtWidgets/QTableWidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="367" column="8" selection-start-line="367" selection-start-column="8" selection-end-line="367" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Window/result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="34" column="50" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
+          <folding>
+            <element signature="e#48#59#0" expanded="true" />
+            <element signature="e#1751#2812#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Window/facer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-205">
-          <caret line="159" column="46" selection-start-line="159" selection-start-column="46" selection-end-line="159" selection-end-column="46" />
-          <folding>
-            <element signature="e#25#34#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="140">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>

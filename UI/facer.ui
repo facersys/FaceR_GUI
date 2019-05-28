@@ -92,17 +92,17 @@
             </property>
             <item>
              <property name="text">
-              <string>Cascade</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
               <string>MTCNN-Plus</string>
              </property>
             </item>
             <item>
              <property name="text">
               <string>MTCNN</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cascade</string>
              </property>
             </item>
            </widget>

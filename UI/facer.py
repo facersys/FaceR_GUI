@@ -291,9 +291,9 @@ class Ui_FaceR_Client(object):
         _translate = QtCore.QCoreApplication.translate
         FaceR_Client.setWindowTitle(_translate("FaceR_Client", "FaceR Client"))
         self.label_2.setText(_translate("FaceR_Client", "Algorithms"))
-        self.algoritms_selected.setItemText(0, _translate("FaceR_Client", "Cascade"))
-        self.algoritms_selected.setItemText(1, _translate("FaceR_Client", "MTCNN-Plus"))
-        self.algoritms_selected.setItemText(2, _translate("FaceR_Client", "MTCNN"))
+        self.algoritms_selected.setItemText(0, _translate("FaceR_Client", "MTCNN-Plus"))
+        self.algoritms_selected.setItemText(1, _translate("FaceR_Client", "MTCNN"))
+        self.algoritms_selected.setItemText(2, _translate("FaceR_Client", "Cascade"))
         self.open_camera_btn.setText(_translate("FaceR_Client", "Open Camera"))
         self.close_camera_btn.setText(_translate("FaceR_Client", "Close Camera"))
         self.face_rect_btn.setText(_translate("FaceR_Client", "Show Face"))

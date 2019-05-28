@@ -4,9 +4,9 @@ import time
 
 from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
 
+from Tool import xtredis
 from Window.base import BaseWindow
-from Window.global_var import get_value
-from Tool.others import get_user_info
+from Tool.others import get_user_info, gender2str
 from Tool.feedback import show_dialog
 from UI.result import Ui_checked_result
 
@@ -30,11 +30,23 @@ class ResultWindow(BaseWindow):
     def update(self):
         """更新数据"""
         # 先删除所有数据，这里不考虑性能
-        [self.ui.result_table.removeRow(i) for i in range(self.ui.result_table.rowCount())]
+        self.ui.result_table.setRowCount(0)
+        checked_uids = xtredis.lrange('checked_uid', 0, -1)
+        checked_times = xtredis.lrange('checked_time', 0, -1)
+        for index, uid in enumerate(checked_uids):
+            if uid[:3] == 'sid':
+                self.insert_row(
+                    index,
+                    [uid[3:], checked_times[index], '', '', '', '']
+                )
+            else:
+                userinfo = get_user_info(uid)
+                self.insert_row(
+                    index,
+                    [userinfo.get('sid'), checked_times[index], userinfo.get('name'),
+                     gender2str(userinfo.get('gender')), userinfo.get('class_name'), userinfo.get('major')]
+                )
 
-        for index, student in enumerate(get_value('checked_students')):
-            value = get_user_info(student)
-            self.insert_row(index, value)
         self.show()
 
     def insert_row(self, row_index, value):
@@ -54,11 +66,20 @@ class ResultWindow(BaseWindow):
             workbook = Workbook()
             booksheet = workbook.active
 
-            for row_index, student in enumerate(get_value('checked_students')):
-                value = get_user_info(student)
+            checked_uids = xtredis.lrange('checked_uid', 0, -1)
+            checked_times = xtredis.lrange('checked_time', 0, -1)
+            for row_index, uid in enumerate(checked_uids):
+                if uid[:3] == 'sid':
+                    for col_index, item in enumerate(
+                            [uid[3:], checked_times[row_index], '', '', '', '']):
+                        booksheet.cell(row_index + 1, col_index + 1).value = item
+                else:
+                    userinfo = get_user_info(uid)
 
-                for col_index, item in enumerate(value):
-                    booksheet.cell(row_index+1, col_index+1).value = item
+                    for col_index, item in enumerate(
+                            [userinfo.get('sid'), checked_times[row_index], userinfo.get('name'),
+                             gender2str(userinfo.get('gender')), userinfo.get('class_name'), userinfo.get('major')]):
+                        booksheet.cell(row_index + 1, col_index + 1).value = item
 
             workbook.save(filepath)
             show_dialog('Success', 'Export data success.')

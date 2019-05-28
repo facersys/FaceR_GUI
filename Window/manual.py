@@ -5,7 +5,7 @@ from Window.base import BaseWindow
 from Config import getConfig
 from Tool.feedback import show_dialog
 from UI.manual import Ui_manual_check_in
-from Tool import mongo
+from Tool import mongo, xtredis
 
 __author__ = "YingJoy"
 
@@ -24,8 +24,7 @@ class ManualWindow(BaseWindow):
         self.ui.check_in_btn.clicked.connect(self.check_in)
 
     def exist_stu(self, sid):
-        students = [item.get('sid') for item in mongo.find(getConfig('mongodb', 'user_collection'), {})]
-        if sid not in students:
+        if 'sid' + sid in xtredis.lrange('checked_uids', 0, -1):
             show_dialog('Error', 'Student not exists.')
             return False
         return True

@@ -70,7 +70,6 @@ def get_user_info(uid):
     """通过用户id获取用户信息，可保存到excel中的格式"""
     with db.cursor() as cursor:
         sql = f"""SELECT * FROM user WHERE id='{uid}'"""
-        print(sql)
         cursor.execute(sql)
         result = cursor.fetchone()
     return result
