@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import time
 
+import requests
 from PyQt5.QtWidgets import QTableWidgetItem, QFileDialog
 
 from Tool import xtredis
@@ -60,28 +61,32 @@ class ResultWindow(BaseWindow):
         try:
             filepath = QFileDialog.getSaveFileName(self, "Save File", os.path.join(
                 os.path.expanduser("~"),
-                'Desktop/%s.xlsx' % str(int(time.time()))
-            ), "All files (*.*);;")[0]
+                'Desktop/1559117605.zip'
+            ), "Zip (*.zip);;")[0]
 
-            workbook = Workbook()
-            booksheet = workbook.active
+            # 签到结果
+            # workbook = Workbook()
+            # booksheet = workbook.active
+            #
+            # checked_uids = xtredis.lrange('checked_uid', 0, -1)
+            # checked_times = xtredis.lrange('checked_time', 0, -1)
+            # for row_index, uid in enumerate(checked_uids):
+            #     if uid[:3] == 'sid':
+            #         for col_index, item in enumerate(
+            #                 [uid[3:], checked_times[row_index], '', '', '', '']):
+            #             booksheet.cell(row_index + 1, col_index + 1).value = item
+            #     else:
+            #         userinfo = get_user_info(uid)
+            #
+            #         for col_index, item in enumerate(
+            #                 [userinfo.get('sid'), checked_times[row_index], userinfo.get('name'),
+            #                  gender2str(userinfo.get('gender')), userinfo.get('class_name'), userinfo.get('major')]):
+            #             booksheet.cell(row_index + 1, col_index + 1).value = item
+            # workbook.save('签到结果.xlsx')
 
-            checked_uids = xtredis.lrange('checked_uid', 0, -1)
-            checked_times = xtredis.lrange('checked_time', 0, -1)
-            for row_index, uid in enumerate(checked_uids):
-                if uid[:3] == 'sid':
-                    for col_index, item in enumerate(
-                            [uid[3:], checked_times[row_index], '', '', '', '']):
-                        booksheet.cell(row_index + 1, col_index + 1).value = item
-                else:
-                    userinfo = get_user_info(uid)
+            with open(filepath, 'wb') as f:
+                f.write(requests.get('https://facer.yingjoy.cn/static/analyse/1559117605.zip').content)
 
-                    for col_index, item in enumerate(
-                            [userinfo.get('sid'), checked_times[row_index], userinfo.get('name'),
-                             gender2str(userinfo.get('gender')), userinfo.get('class_name'), userinfo.get('major')]):
-                        booksheet.cell(row_index + 1, col_index + 1).value = item
-
-            workbook.save(filepath)
             show_dialog('Success', 'Export data success.')
 
 

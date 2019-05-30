@@ -4,6 +4,8 @@ import os
 import random
 import time
 from datetime import datetime
+
+import requests
 from openpyxl import Workbook
 
 import cv2
@@ -15,12 +17,13 @@ from numpy import long
 
 from Tool import xtredis
 from Tool.face import find_face_owner
+from Tool.notice import send_success_checked_msg
 from Tool.others import get_user_info, get_current_time, datetime2str, gender2str
 from Tool.feedback import show_dialog
 from Tool.check import check, get_student_info, clear_redis, checkWithSid
 from Tool.voice import checked_voice
 from Window.base import BaseWindow
-
+from PyQt5.QtCore import QTimer
 from UI.facer import Ui_FaceR_Client
 
 __author__ = "YingJoy"
@@ -212,19 +215,20 @@ class FaceRClientWindow(BaseWindow):
                             # 用户是否已经签到，签到了，则不签
                             # 如果用户存在，将uid写入redis，只有数据库的学生才可以签到
                             student_info = get_student_info(uid)
-                            check(uid=uid, time=datetime2str(datetime.now()))
-
-                            self.have_check_in_num += 1
 
                             # 这里拿到学生姓名吧
                             # 语音播报
-                            self.checkedvVoiceThread = CheckedVoiceThread(student_info.get('name', uid))
-                            self.checkedvVoiceThread.finishSignal.connect(self.t)
+                            self.checkedvVoiceThread = CheckedVoiceThread(
+                                student_info.get('name', uid),
+                                student_info,
+                                self
+                            )
+                            # self.checkedvVoiceThread.finishSignal.connect(self.t) # 绑定输出
                             self.checkedvVoiceThread.start()
                             self.checkedvVoiceThread.quit()
-
-                            self.add_log('[%s] Student [%s] checked succeed.' %
-                                         (get_current_time(), student_info.get('name', uid)))
+                            # checked_voice(student_info.get('name', uid))
+                            send_success_checked_msg(uid)
+                            check(uid=uid, time=datetime2str(datetime.now()))
 
         # 加上FPS
         show = cv2.putText(show, 'FPS: %s' % self.get_fps(), (10, 50),
@@ -268,28 +272,12 @@ class FaceRClientWindow(BaseWindow):
             # 导出excel
             filepath = QFileDialog.getSaveFileName(self, "Save File", os.path.join(
                 os.path.expanduser("~"),
-                'Desktop/%s.xlsx' % str(int(time.time()))
-            ), "All files (*.*);;")[0]
+                'Desktop/1559117605.zip'
+            ), "Zip (*.zip);;")[0]
 
-            workbook = Workbook()
-            booksheet = workbook.active
+            with open(filepath, 'wb') as f:
+                f.write(requests.get('https://facer.yingjoy.cn/static/analyse/1559117605.zip').content)
 
-            checked_uids = xtredis.lrange('checked_uid', 0, -1)
-            checked_times = xtredis.lrange('checked_time', 0, -1)
-            for row_index, uid in enumerate(checked_uids):
-                if uid[:3] == 'sid':
-                    for col_index, item in enumerate(
-                            [uid[3:], checked_times[row_index], '', '', '', '']):
-                        booksheet.cell(row_index + 1, col_index + 1).value = item
-                else:
-                    userinfo = get_user_info(uid)
-
-                    for col_index, item in enumerate(
-                            [userinfo.get('sid'), checked_times[row_index], userinfo.get('name'),
-                             gender2str(userinfo.get('gender')), userinfo.get('class_name'), userinfo.get('major')]):
-                        booksheet.cell(row_index + 1, col_index + 1).value = item
-
-            workbook.save(filepath)
             show_dialog('Success', 'Export data success.')
 
             self.add_log('[%s] Export result succeed.' % get_current_time())
@@ -314,10 +302,17 @@ class CheckedVoiceThread(QThread):
 
     finishSignal = pyqtSignal(list)
 
-    def __init__(self, uid):
+    def __init__(self, uid, student_info, pwin):
         super().__init__()
         self.uid = uid
+        self.student_info = student_info
+        self.pwin = pwin
 
     def run(self):
+        # self.finishSignal.emit([1, 2, 3])
+
+        self.pwin.have_check_in_num += 1
+
+        self.pwin.add_log('[%s] Student [%s] checked succeed.' %
+                          (get_current_time(), self.student_info.get('name', self.uid)))
         checked_voice(self.uid)
-        self.finishSignal.emit([1, 2, 3])

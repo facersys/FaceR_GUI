@@ -28,10 +28,21 @@ def checked_voice(name):
         tempFile.close()
 
         pygame.mixer.init()
+        clock = pygame.time.Clock()
+        # 加载音乐
         track = pygame.mixer.music.load(tempFile.name)
+        # 播放音乐
         pygame.mixer.music.play()
-        time.sleep(5)
-        pygame.mixer.music.stop()
-        pygame.mixer.quit()
 
-        os.remove(tempFile.name)
+        while pygame.mixer.music.get_busy():
+            clock.tick(30)
+        else:
+            pygame.mixer.quit()
+            try:
+                os.remove(tempFile.name)
+            except PermissionError:
+                pass
+
+
+if __name__ == '__main__':
+    checked_voice('应赵康')
